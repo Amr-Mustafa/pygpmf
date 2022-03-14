@@ -66,7 +66,10 @@ def parse_gps_block(gps_block):
     block_dict = {
         s.key: s for s in gps_block
     }
-
+    
+    if len(block_dict["GPS5"].value) == 0:
+      return None
+    
     gps_data = block_dict["GPS5"].value * 1.0 / block_dict["SCAL"].value
 
     latitude, longitude, altitude, speed_2d, speed_3d = gps_data.T
